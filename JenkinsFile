@@ -2,6 +2,7 @@ node {
     stage ('Prepare') {
         sh "cd"
         sh "echo $PWD"
+        sd "dir"
         sh "ssh -i Llave.pem teamsoa@168.62.39.210 "
         sh "pm2 delete 1"
         sh "pm2 delete 0"
