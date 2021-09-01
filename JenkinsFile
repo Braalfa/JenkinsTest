@@ -1,20 +1,20 @@
 node {
-    stage (‘Prepare’) {
+    stage ('Prepare') {
         sh "ssh -i Llave.pem teamsoa@168.62.39.210 "
         sh "pm2 delete 1"
         sh "pm2 delete 0"
 
     }
-    stage (‘Code_analyse’) {
+    stage ('Code_analyse') {
         sh "echo “Run some lints”"
     }
-    stage (‘Unit_test’) {
+    stage ('Unit_test') {
         sh "echo “Tests will back”"
     }
-    stage (‘Build’) {
+    stage ('Build') {
         sh "echo “Tests will back”"
     }
-    stage (‘Deploy’) {
+    stage ('Deploy') {
         
         sh "cd JenkinsTest"
         sh "git pull"
