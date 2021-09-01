@@ -1,6 +1,5 @@
 node {
     stage ('Prepare') {
-        sh "cd"
         sh "echo $PWD"
         sh "ls"
         sh "ssh -i Llave.pem teamsoa@168.62.39.210 "
