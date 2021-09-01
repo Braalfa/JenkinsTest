@@ -1,34 +1,32 @@
-pipeline {
-    agent any 
-    stages {
-        stage (‘Prepare’) {
-            sh "ssh -i Llave.pem teamsoa@168.62.39.210 "
-            sh "pm2 delete 1"
-            sh "pm2 delete 0"
+node {
+    stage (‘Prepare’) {
+        sh "ssh -i Llave.pem teamsoa@168.62.39.210 "
+        sh "pm2 delete 1"
+        sh "pm2 delete 0"
 
-        }
-        stage (‘Code_analyse’) {
-            sh "echo “Run some lints”"
-        }
-        stage (‘Unit_test’) {
-            sh "echo “Tests will back”"
-        }
-        stage (‘Build’) {
-            sh "echo “Tests will back”"
-        }
-        stage (‘Deploy’) {
-            
-            sh "cd JenkinsTest"
-            sh "git pull"
-            
-            sh "cd api/myapp"
-            sh "export PORT=5000"
-            sh "pm2 --name api start npm -- start"
-
-            sh "cd"
-            sh "cd JenkinsTest/frontend/myapp"
-            sh "export PORT=3000"
-            sh "pm2 --name frontend start npm -- start"
-        }
     }
+    stage (‘Code_analyse’) {
+        sh "echo “Run some lints”"
+    }
+    stage (‘Unit_test’) {
+        sh "echo “Tests will back”"
+    }
+    stage (‘Build’) {
+        sh "echo “Tests will back”"
+    }
+    stage (‘Deploy’) {
+        
+        sh "cd JenkinsTest"
+        sh "git pull"
+        
+        sh "cd api/myapp"
+        sh "export PORT=5000"
+        sh "pm2 --name api start npm -- start"
+
+        sh "cd"
+        sh "cd JenkinsTest/frontend/myapp"
+        sh "export PORT=3000"
+        sh "pm2 --name frontend start npm -- start"
+    }
+
 }
