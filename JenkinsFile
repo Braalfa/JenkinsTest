@@ -2,7 +2,7 @@ pipeline {
     agent any 
     stages {
         stage (‘Prepare’) {
-            sh ‘ssh -i Llave.pem teamsoa@168.62.39.210’
+            sh ‘ssh -i Llave.pem teamsoa@168.62.39.210 ’
             sh ‘pm2 delete 1’
             sh ‘pm2 delete 0’
 
