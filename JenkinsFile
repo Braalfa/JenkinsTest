@@ -1,7 +1,7 @@
 node {
     stage ('Prepare') {
-        sh "ssh -o StrictHostKeyChecking=no -i Llave.pem teamsoa@168.62.39.210 pm2 delete 1"
-        sh "ssh -o StrictHostKeyChecking=no -i Llave.pem teamsoa@168.62.39.210 pm2 delete 0"
+        sh "sudo ssh -o StrictHostKeyChecking=no -i Llave.pem teamsoa@168.62.39.210 pm2 delete 1"
+        sh "sudo ssh -o StrictHostKeyChecking=no -i Llave.pem teamsoa@168.62.39.210 pm2 delete 0"
 
     }
     stage ('Code_analyse') {
@@ -15,9 +15,9 @@ node {
     }
     stage ('Deploy') {
         
-        sh 'ssh -o StrictHostKeyChecking=no -i Llave.pem teamsoa@168.62.39.210 "cd JenkinsTest && git pull"'
-        sh 'ssh -o StrictHostKeyChecking=no -i Llave.pem teamsoa@168.62.39.210 "cd JenkinsTest/api/myapp && export PORT=5000 && pm2 --name api start npm -- start"'
-        sh 'ssh -o StrictHostKeyChecking=no -i Llave.pem teamsoa@168.62.39.210 "cd JenkinsTest/frontend/myapp && export PORT=3000 && pm2 --name frontend start npm -- start"'
+        sh 'sudo ssh -o StrictHostKeyChecking=no -i Llave.pem teamsoa@168.62.39.210 "cd JenkinsTest && git pull"'
+        sh 'sudo ssh -o StrictHostKeyChecking=no -i Llave.pem teamsoa@168.62.39.210 "cd JenkinsTest/api/myapp && export PORT=5000 && pm2 --name api start npm -- start"'
+        sh 'sudo ssh -o StrictHostKeyChecking=no -i Llave.pem teamsoa@168.62.39.210 "cd JenkinsTest/frontend/myapp && export PORT=3000 && pm2 --name frontend start npm -- start"'
     }
 
 }
