@@ -1,10 +1,7 @@
 node {
     stage ('Prepare') {
-        sh "echo $PWD"
-        sh "ls"
-        sh "ssh -i Llave.pem teamsoa@168.62.39.210 "
-        sh "pm2 delete 1"
-        sh "pm2 delete 0"
+        sh "ssh -i Llave.pem teamsoa@168.62.39.210 pm2 delete 1"
+        sh "ssh -i Llave.pem teamsoa@168.62.39.210 pm2 delete 0"
 
     }
     stage ('Code_analyse') {
@@ -18,17 +15,9 @@ node {
     }
     stage ('Deploy') {
         
-        sh "cd JenkinsTest"
-        sh "git pull"
-        
-        sh "cd api/myapp"
-        sh "export PORT=5000"
-        sh "pm2 --name api start npm -- start"
-
-        sh "cd"
-        sh "cd JenkinsTest/frontend/myapp"
-        sh "export PORT=3000"
-        sh "pm2 --name frontend start npm -- start"
+        sh 'ssh -i Llave.pem teamsoa@168.62.39.210 "cd JenkinsTest && git pull"'
+        sh 'ssh -i Llave.pem teamsoa@168.62.39.210 "cd JenkinsTest/api/myapp && export PORT=5000 && pm2 --name api start npm -- start"'
+        sh 'ssh -i Llave.pem teamsoa@168.62.39.210 "cd JenkinsTest/frontend/myapp && export PORT=3000 && pm2 --name frontend start npm -- start"'
     }
 
 }
