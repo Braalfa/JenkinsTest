@@ -1,5 +1,5 @@
 pipeline{
-    agent any
+    agent 400
     triggers {
         pollSCM 'H/2 * * * *'
     }
@@ -14,7 +14,6 @@ pipeline{
 
 node {
     stage ('Prepare') {
-        sh 'sudo chmod 400 Llave.pem'
         catchError {
             sh "ssh -o StrictHostKeyChecking=no -i Llave.pem teamsoa@168.62.39.210 pm2 delete 1"
         }
