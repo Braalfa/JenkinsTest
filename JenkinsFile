@@ -1,3 +1,17 @@
+pipeline{
+    agent any
+    triggers {
+        pollSCM 'H/2 * * * *'
+    }
+    stages{
+        stage("initial"){
+                steps {
+                sh "echo “run trigger”"
+            }
+        }
+    }
+}
+
 node {
     stage ('Prepare') {
         catchError {
