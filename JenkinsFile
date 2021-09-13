@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage("initial"){
                 steps {
-                sh "echo “run trigger”"
+                echo "run trigger"
             }
         }
     }
