@@ -1,16 +1,4 @@
-pipeline{
-    agent none
-    triggers {
-        pollSCM 'H/2 * * * *'
-    }
-    stages{
-        stage("initial"){
-                steps {
-                echo "run trigger"
-            }
-        }
-    }
-}
+
 
 node {
     stage ('Prepare') {
