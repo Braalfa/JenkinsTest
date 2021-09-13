@@ -1,8 +1,5 @@
 pipeline{
-    agent {
-  label '400'
-}
-
+    agent none
     triggers {
         pollSCM 'H/2 * * * *'
     }
