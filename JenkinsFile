@@ -21,14 +21,14 @@ node {
         def PROJECT_NAME = "brayan156_JenkinsTest"
 
             withSonarQubeEnv('SonarQube') {
-            sh """
-   ${SCANNER_HOME}/bin/sonar-scanner \
-   -Dsonar.organization=${ORGANIZATION} \
-   -Dsonar.projectKey=${PROJECT_NAME} \
-   -Dsonar.sources=. \
-"""
+                sh """
+                    ${SCANNER_HOME}/bin/sonar-scanner \
+                    -Dsonar.organization=${ORGANIZATION} \
+                    -Dsonar.projectKey=${PROJECT_NAME} \
+                    -Dsonar.sources=. \
+                """
+            }
     }
-
     stage ('Code_analyse') {
         sh "echo “Run some lints”"
     }
