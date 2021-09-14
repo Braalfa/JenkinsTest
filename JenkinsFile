@@ -1,5 +1,4 @@
-pipeline{
-    agent none
+
     node {
         stages {
             stage('Initialize') {
@@ -14,7 +13,7 @@ pipeline{
             }
         }
     }
-}
+
 
 node {
     stage ('Prepare') {
