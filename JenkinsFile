@@ -17,8 +17,8 @@ node {
     }
     stage('SonarCloud') {
     env.JAVA_HOME="${tool 'jdk11'}"
-    env.PATH="${env.JAVA_HOME}/bin"
-
+    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
+    
         def SCANNER_HOME = tool 'sonar'
         def ORGANIZATION = "brayan156"
         def PROJECT_NAME = "brayan156_JenkinsTest"
