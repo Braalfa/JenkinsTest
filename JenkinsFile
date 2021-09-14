@@ -23,7 +23,7 @@ node {
         }
         def  SCANNER_HOME = tool 'sonar'
             withSonarQubeEnv('SonarQube') {
-            sh "${scannerHome}/bin/sonar-scanner"
+            sh "${SCANNER_HOME}/bin/sonar-scanner"
             
         }
     }
