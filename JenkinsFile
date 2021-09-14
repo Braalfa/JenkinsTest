@@ -12,7 +12,7 @@ pipeline {
          SCANNER_HOME = tool 'sonar'
          ORGANIZATION = "brayan156"
          PROJECT_NAME = "brayan156_JenkinsTest"
-    |   }
+          }
             steps {
                 sh "java -version"
         
