@@ -17,7 +17,7 @@ node {
     }
     stage('SonarCloud') {
         environment {
-             SCANNER_HOME = tool 'sonarscan'
+             SCANNER_HOME = tool 'sonar'
              ORGANIZATION = "brayan156"
              PROJECT_NAME = "brayan156_JenkinsTest"
         }
