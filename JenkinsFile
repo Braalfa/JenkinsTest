@@ -17,14 +17,13 @@ node {
     }
     stage('SonarCloud') {
         environment {
-             SCANNER_HOME = tool 'sonar'
+            
              ORGANIZATION = "brayan156"
              PROJECT_NAME = "brayan156_JenkinsTest"
         }
+        def  SCANNER_HOME = tool 'sonar'
             withSonarQubeEnv('SonarQube') {
-                sh '''${SCANNER_HOME}/bin/sonar-scanner --version -Dsonar.organization=${ORGANIZATION} \
-                -Dsonar.projectKey=${PROJECT_NAME} \
-                -Dsonar.sources=.'''
+            sh "${scannerHome}/bin/sonar-scanner"
             
         }
     }
