@@ -1,3 +1,26 @@
+pipeline{
+ agent any
+ tools{
+     jdk 'jdk11'
+ }
+ stages{ 
+    stage('build'){
+        def SCANNER_HOME = tool 'sonar'
+        def ORGANIZATION = "brayan156"
+        def PROJECT_NAME = "brayan156_JenkinsTest"
+
+            withSonarQubeEnv('SonarQube') {
+                sh """
+                    ${SCANNER_HOME}/bin/sonar-scanner -X \
+                    -Dsonar.organization=${ORGANIZATION} \
+                    -Dsonar.projectKey=${PROJECT_NAME} \
+                    -Dsonar.sources=. \
+                """
+            }
+       }
+    } 
+ } 
+
 node {
     stage('Initialize') {
             //enable remote triggers
@@ -18,18 +41,7 @@ node {
     stage('SonarCloud') {
     tool name: 'jdk11', type: 'jdk'
     
-        def SCANNER_HOME = tool 'sonar'
-        def ORGANIZATION = "brayan156"
-        def PROJECT_NAME = "brayan156_JenkinsTest"
 
-            withSonarQubeEnv('SonarQube') {
-                sh """
-                    ${SCANNER_HOME}/bin/sonar-scanner -X \
-                    -Dsonar.organization=${ORGANIZATION} \
-                    -Dsonar.projectKey=${PROJECT_NAME} \
-                    -Dsonar.sources=. \
-                """
-            }
     }
     stage ('Code_analyse') {
         sh "echo “Run some lints”"
