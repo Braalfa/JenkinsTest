@@ -17,10 +17,10 @@ node {
     }
     stage('SonarCloud') {
 
-    jdk = tool 'jdk11'
-    env.JAVA_HOME = "${jdk}"
-    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
-    
+  env.JAVA_HOME="${tool 'jdk11'}" //JDK13 is pre-configured in Jenkins
+  env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
+  sh 'java -version'
+
         def SCANNER_HOME = tool 'sonar'
         def ORGANIZATION = "brayan156"
         def PROJECT_NAME = "brayan156_JenkinsTest"
