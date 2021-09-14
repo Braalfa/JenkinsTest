@@ -15,6 +15,22 @@ node {
             sh "ssh -o StrictHostKeyChecking=no teamsoa@168.62.39.210 pm2 delete 0"}
         }
     }
+    stage('SonarCloud') {
+        environment {
+            SCANNER_HOME = tool 'sonarscan'
+            ORGANIZATION = "brayan156"
+            PROJECT_NAME = "brayan156_JenkinsTest"
+        }
+        steps {
+            withSonarQubeEnv('SonarQube') {
+                sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
+                -Dsonar.java.binaries=build/classes/java/ \
+                -Dsonar.projectKey=$PROJECT_NAME \
+                -Dsonar.sources=.'''
+            }
+        }
+    }
+
     stage ('Code_analyse') {
         sh "echo “Run some lints”"
     }
