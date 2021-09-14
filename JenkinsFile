@@ -17,8 +17,10 @@ node {
     }
     stage('SonarCloud') {
 
-        jdk "jdk11" // the name you have given the JDK installation using the JDK manager (Global Tool Configuration)
-         
+    jdk = tool 'jdk11'
+    env.JAVA_HOME = "${jdk}"
+    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
+    
         def SCANNER_HOME = tool 'sonar'
         def ORGANIZATION = "brayan156"
         def PROJECT_NAME = "brayan156_JenkinsTest"
