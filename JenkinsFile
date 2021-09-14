@@ -5,15 +5,18 @@ pipeline {
     tools {
         jdk "jdk11"
     }
-
+    
     stages {
         stage("Use maven") {
+          environment {
+         SCANNER_HOME = tool 'sonar'
+         ORGANIZATION = "brayan156"
+         PROJECT_NAME = "brayan156_JenkinsTest"
+    |   }
             steps {
                 sh "java -version"
+        
 
-        def SCANNER_HOME = tool 'sonar'
-        def ORGANIZATION = "brayan156"
-        def PROJECT_NAME = "brayan156_JenkinsTest"
 
             withSonarQubeEnv('SonarQube') {
                 sh """
