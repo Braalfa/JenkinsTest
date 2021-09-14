@@ -1,14 +1,14 @@
 pipeline{
-    agent any
+    agent none
         tools {
         jdk "jdk11" // the name you have given the JDK installation using the JDK manager (Global Tool Configuration)
     }
     stages{
-         steps  {
+
              stage ('echo'){
         echo "hello world"
              }
-        }
+
     }
 }
 
