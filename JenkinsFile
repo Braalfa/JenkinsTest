@@ -16,9 +16,9 @@ node {
         }
     }
     stage('SonarCloud') {
-        tools {
-             jdk "jdk11" // the name you have given the JDK installation using the JDK manager (Global Tool Configuration)
-         }
+
+        jdk "jdk11" // the name you have given the JDK installation using the JDK manager (Global Tool Configuration)
+         
         def SCANNER_HOME = tool 'sonar'
         def ORGANIZATION = "brayan156"
         def PROJECT_NAME = "brayan156_JenkinsTest"
