@@ -3,13 +3,13 @@ pipeline{
         tools {
         jdk "jdk11" // the name you have given the JDK installation using the JDK manager (Global Tool Configuration)
     }
-    stages{
 
-             stage ('init'){
+
+        stage ('init'){
         echo "hello world"
              }
 
-    }
+
 }
 
 node {
