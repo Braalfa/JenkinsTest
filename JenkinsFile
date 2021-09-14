@@ -1,15 +1,18 @@
 pipeline{
     agent none
-    triggers {
-        pollSCM 'H/2 * * * *'
-    }
-    stages{
-        stage("initial"){
-                steps {
-                echo "run trigger"
+    stages {
+        stage('Initialize') {
+            steps {
+                //enable remote triggers
+                script {
+                    properties([pipelineTriggers([pollSCM('H/2 * * * *')])])
+                }
+                //define scm connection for polling
+                git url: 'https://github.com/Braalfa/JenkinsTest'
             }
         }
     }
+
 }
 
 node {
