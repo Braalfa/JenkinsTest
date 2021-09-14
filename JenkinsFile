@@ -1,4 +1,5 @@
 node {
+    def branch = params.Branch
     stage ('Prepare') {
         catchError {
             sh "ssh -o StrictHostKeyChecking=no -i Llave.pem teamsoa@168.62.39.210 pm2 delete 1"
@@ -8,6 +9,12 @@ node {
         }
     }
     stage ('Code_analyse') {
+                    checkout([
+                $class: 'GitSCM',
+                branches: [[
+                    name: '*/' + "master"
+                ]]
+            ])
         sh "echo “Run some lints”"
     }
     stage ('Unit_test') {
