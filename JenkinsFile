@@ -28,6 +28,7 @@ node {
                     -Dsonar.organization=${ORGANIZATION} \
                     -Dsonar.projectKey=${PROJECT_NAME} \
                     -Dsonar.sources=. \
+                    -Dsonar.host.url=https://sonarcloud.io
                 """
             }
     }
