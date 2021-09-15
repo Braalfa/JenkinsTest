@@ -1,3 +1,5 @@
+def runParallel = true
+
 node {
     stage('Initialize') {
             //enable remote triggers
