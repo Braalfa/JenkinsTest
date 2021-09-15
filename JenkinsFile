@@ -1,36 +1,3 @@
-pipeline {
-
-    agent any
-
-    tools {
-        jdk "jdk11"
-    }
-    
-    stages {
-        stage("Use maven") {
-          environment {
-         SCANNER_HOME = tool 'sonar'
-         ORGANIZATION = "brayan156"
-         PROJECT_NAME = "brayan156_JenkinsTest"
-          }
-            steps {
-                sh "java -version"
-        
-
-
-            withSonarQubeEnv('SonarQube') {
-                sh """
-                    ${SCANNER_HOME}/bin/sonar-scanner \
-                    -Dsonar.organization=${ORGANIZATION} \
-                    -Dsonar.projectKey=${PROJECT_NAME} \
-                    -Dsonar.sources=. \
-                """
-            }
-            }
-        }
-    }
-}
-
 node {
     stage('Initialize') {
             //enable remote triggers
@@ -47,6 +14,22 @@ node {
             sshagent(credentials : ['teamsoakey']){
             sh "ssh -o StrictHostKeyChecking=no teamsoa@168.62.39.210 pm2 delete 0"}
         }
+    }
+    stage('SonarCloud') {
+
+    
+        def SCANNER_HOME = tool 'sonar'
+        def ORGANIZATION = "brayan156"
+        def PROJECT_NAME = "brayan156_JenkinsTest"
+
+            withSonarQubeEnv('SonarQube') {
+                sh """
+                    ${SCANNER_HOME}/bin/sonar-scanner -X \
+                    -Dsonar.organization=${ORGANIZATION} \
+                    -Dsonar.projectKey=${PROJECT_NAME} \
+                    -Dsonar.sources=. \
+                """
+            }
     }
     stage ('Code_analyse') {
         sh "echo “Run some lints”"
