@@ -27,9 +27,10 @@ node {
     }
     paralles
      stage('SonarCloud and deploy') {
-                 parallel([
-            sonarcloud: {
-        def SCANNER_HOME = tool 'sonar'
+        def stages = [:]
+
+        stages["sonarcloud"] = {
+                    def SCANNER_HOME = tool 'sonar'
         def ORGANIZATION = "brayan156"
         def PROJECT_NAME = "brayan156_JenkinsTest"
 
@@ -42,17 +43,15 @@ node {
                     -Dsonar.host.url=https://sonarcloud.io
                 """
             }
-            },
-            deploy: {
+        }
+        stages["deploy"] = {
         sshagent(credentials : ['teamsoakey']){
         sh 'ssh -o StrictHostKeyChecking=no teamsoa@168.62.39.210 "cd JenkinsTest && git pull"'
         sh 'ssh -o StrictHostKeyChecking=no teamsoa@168.62.39.210 "cd JenkinsTest/api/myapp && export PORT=5000 && pm2 --name api start npm -- start"'
         sh 'ssh -o StrictHostKeyChecking=no teamsoa@168.62.39.210 "cd JenkinsTest/frontend/myapp && export PORT=3000 && pm2 --name frontend start npm -- start"'
         }
-            }
-        ])
-    
-
+        }
+        parallel(stages)
     }
    currentBuild.result = 'SUCCESS'
    return
