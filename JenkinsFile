@@ -22,9 +22,6 @@ node {
         sh 'ssh -o StrictHostKeyChecking=no teamsoa@168.62.39.210 "cd JenkinsTest/frontend/myapp &&  npm ci"'
         }
     }
-    stage ('Code_analyse') {
-        sh "echo “Run some lints”"
-    }
     stage ('Unit_test') {
         sh "echo “Tests will back”"
     }
