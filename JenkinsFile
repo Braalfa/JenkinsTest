@@ -30,6 +30,7 @@ node {
                  parallel(
             "sonarcloud": {
                 stage("sonarcloud") {
+                            catchError {
         def SCANNER_HOME = tool 'sonar'
         def ORGANIZATION = "brayan156"
         def PROJECT_NAME = "brayan156_JenkinsTest"
@@ -43,6 +44,7 @@ node {
                     -Dsonar.host.url=https://sonarcloud.io
                 """
             }
+                }
                 }
             },
             "deploy": {
